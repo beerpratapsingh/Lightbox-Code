@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Light Box Demo</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" src="lightbox.js"></script>
+	<script type="text/javascript" src="jquery-3.0.0.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){	
+			var $lb     = $(".light-box"),
+				$lbClose = $(".close-btn"),
+				$lbIimg = $(".light-box-img"),
+				$lbTtl = $(".lightbox-title"),
+				$lbBg  = $(".light-box-bg");
+
+			function showLightbox(){
+				$lbBg.fadeIn();
+				$lb.addClass('visible');
+			}
+			function closeLightbox(){				
+				$lbBg.fadeOut();
+				$lb.removeClass('visible');					
+			}			
+
+			$('.light-box-list').on('click', 'a', function(e){
+				e.preventDefault();
+				var sImg = $(this).attr("href");					
+				$lbIimg.attr('src', sImg);	
+				$lbTtl.html($(this).attr('data-title'));
+				showLightbox();		
+				if ($lbBg.is(":visible") == true) {					
+					$lbClose.on('click', function(){
+						closeLightbox();
+					});	
+				}				
+			});
+		});		
+
+	</script>
+</head>
+<body>
+	<div class="light-box-bg"></div>
+	<div class="light-box-list">
+		<ul>
+			<li>
+				<a href="images/1.jpg" data-title="Image One">
+					<img id="img" src="images/1.jpg" alt="">
+				</a>
+			</li>
+			<li>
+				<a href="images/2.png" data-title="Image Two">
+					<img id="img" src="images/2.png" alt="">
+				</a>
+			</li>
+			<li>
+				<a href="images/3.jpg" data-title="Image Three">
+					<img id="img" src="images/3.jpg" alt="">
+				</a>
+			</li>
+		</ul>
+	</div>
+	<div class="light-box">
+		<a class="close-btn" href="#">X</a>
+		<div class="light-box-cont">
+		<h2 class="lightbox-title"></h2>
+			<img class="light-box-img" alt="">
+		</div>
+	</div>	
+
+	<span></span>
+</body>
+</html>
